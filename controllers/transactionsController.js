@@ -1,4 +1,3 @@
-const { useImperativeHandle } = require('react');
 const { Transaction } = require('../models');
 
 //Criar
@@ -27,7 +26,7 @@ exports.create = async (req, res) => {
       transactionBody.createdat = createdat;
     }
 
-    const newTransaction = await Transaction.create(transactionBody);
+    await Transaction.create(transactionBody);
 
     res.status(201).json({
       message: 'Transação criada com sucesso',

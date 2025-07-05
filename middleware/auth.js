@@ -25,7 +25,7 @@ const authenticate = async (req, res, next) => {
     };
 
     next();
-  } catch (err) {
+  } catch {
     return res.status(401).json({ error: 'Token inválido ou expirado' });
   }
 };

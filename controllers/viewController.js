@@ -1,4 +1,4 @@
-const sequelize = require('../config/database');
+const { Op } = require('sequelize');
 const ViewBalance = require('../models/ViewBalance');
 const ViewCategory = require('../models/ViewCategory');
 const viewDebtsNGains = require('../models/ViewDebtsNGains');
