@@ -18,6 +18,7 @@ const PORT = 3000;
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor de teste rodando na porta ${PORT}`);
-  console.log(`Documentação Swagger disponível em: http://localhost:${PORT}/api-docs`);
+  console.log(
+    `Documentação Swagger disponível em: http://localhost:${PORT}/api-docs`,
+  );
 });
-
