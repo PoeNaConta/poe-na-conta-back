@@ -113,11 +113,9 @@ exports.email = async (req, res) => {
     console.error('Erro na verificação de e-mail:', error);
 
     if (error.name === 'TokenExpiredError') {
-      return res
-        .status(410)
-        .json({
-          error: 'Token expirado. Solicite um novo e-mail de verificação.',
-        });
+      return res.status(410).json({
+        error: 'Token expirado. Solicite um novo e-mail de verificação.',
+      });
     }
 
     return res.status(400).json({ error: 'Token inválido.' });
@@ -157,11 +155,9 @@ exports.login = async (req, res) => {
 
     // Verifica se o email foi confirmado
     if (!user.emailverified) {
-      return res
-        .status(403)
-        .json({
-          error: 'E-mail não verificado. Verifique sua caixa de entrada.',
-        });
+      return res.status(403).json({
+        error: 'E-mail não verificado. Verifique sua caixa de entrada.',
+      });
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -269,12 +265,9 @@ exports.requestEmailUpdate = async (req, res) => {
       `,
     });
 
-    return res
-      .status(200)
-      .json({
-        message:
-          'E-mail de verificação enviado. Verifique sua caixa de entrada.',
-      });
+    return res.status(200).json({
+      message: 'E-mail de verificação enviado. Verifique sua caixa de entrada.',
+    });
   } catch (error) {
     console.error('Erro ao solicitar atualização de e-mail:', error);
     return res.status(500).json({ error: 'Erro interno do servidor.' });
@@ -315,11 +308,9 @@ exports.verifyEmail = async (req, res) => {
     console.error('Erro na verificação de e-mail:', error);
 
     if (error.name === 'TokenExpiredError') {
-      return res
-        .status(410)
-        .json({
-          error: 'Token expirado. Solicite novamente a alteração de e-mail.',
-        });
+      return res.status(410).json({
+        error: 'Token expirado. Solicite novamente a alteração de e-mail.',
+      });
     }
 
     return res.status(400).json({ error: 'Token inválido.' });
