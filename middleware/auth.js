@@ -21,11 +21,11 @@ const authenticate = async (req, res, next) => {
 
     req.user = {
       id: user.id,
-      useremail: user.useremail
+      useremail: user.useremail,
     };
 
     next();
-  } catch (err) {
+  } catch {
     return res.status(401).json({ error: 'Token inválido ou expirado' });
   }
 };

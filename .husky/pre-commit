@@ -1,0 +1,16 @@
+case "$(uname -s)" in
+  Linux*) CYAN="\033[36m"; GREEN="\033[32m"; RED="\033[31m"; ENDCOLOR="\033[0m" ;;
+  Darwin*) CYAN="\033[36m"; GREEN="\033[32m"; RED="\033[31m"; ENDCOLOR="\033[0m" ;;
+  *) CYAN=""; GREEN=""; RED=""; ENDCOLOR="" ;;
+esac
+
+echo "\n${CYAN}Fixing formatting and checking for linting errors...${ENDCOLOR}"
+
+if npx lint-staged; then
+  echo "\n${GREEN}The code is formatted and without errors${ENDCOLOR}"
+else
+  echo "\n${RED}Something went wrong...${ENDCOLOR}"
+  exit 1
+fi
+
+echo "\n${GREEN}Done!${ENDCOLOR}"
