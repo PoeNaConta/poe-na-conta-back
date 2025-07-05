@@ -22,6 +22,9 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
+      - name: Verificar a formatação do código
+        run: npm run format:check && echo "Código devidamente formatado"
+
       - name: Verificar inicialização do servidor (simples)
         run: |
           timeout 5s npm start || echo "Servidor iniciado (verificação superficial)"
