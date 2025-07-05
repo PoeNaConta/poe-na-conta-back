@@ -1,6 +1,6 @@
 const User = require('./User');
 const Transaction = require('./Transaction');
-const Category = require('./Category')
+const Category = require('./Category');
 const ViewBalance = require('./ViewBalance');
 const ViewCategory = require('./ViewCategory');
 const ViewDebtsNGains = require('./ViewDebtsNGains');
@@ -17,5 +17,5 @@ module.exports = {
   Category,
   ViewBalance,
   ViewCategory,
-  ViewDebtsNGains
+  ViewDebtsNGains,
 };

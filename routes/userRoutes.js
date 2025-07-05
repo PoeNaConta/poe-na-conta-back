@@ -162,7 +162,7 @@ router.get('/verify-email', userController.email);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-// GET /users/verify-email - Verifica o email 
+// GET /users/verify-email - Verifica o email
 router.get('/users/verify-email', userController.verifyEmail);
 
 /**

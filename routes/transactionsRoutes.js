@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const transactionsController = require('../controllers/transactionsController');
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
 
 /**
  * @swagger
@@ -118,7 +118,11 @@ router.post('/transactions/create', auth, transactionsController.create);
  *               $ref: '#/components/schemas/Error'
  */
 // GET /transactions/list-all-transactions - Lista todas as transações
-router.get('/transactions/list-all-transactions', auth, transactionsController.listAll);
+router.get(
+  '/transactions/list-all-transactions',
+  auth,
+  transactionsController.listAll,
+);
 
 /**
  * @swagger
