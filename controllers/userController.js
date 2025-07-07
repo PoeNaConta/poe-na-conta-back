@@ -37,51 +37,37 @@ exports.createUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(passwordhash, salt);
-
+      
     const newUser = await User.create({
-      name,
-      useremail,
-      passwordhash: hashedPassword,
-      emailverified: false,
-    });
-
-    // Gera token com ID do usuário
+        name,
+        useremail,
+        passwordhash: hashedPassword,
+        emailverified: false,
+      });
+  
     const emailToken = jwt.sign(
       { id: newUser.id },
       process.env.JWT_EMAIL_SECRET,
       { expiresIn: '20m' },
     );
-
-    const verifyUrl = `${process.env.URL_VERIFICATION}?token=${emailToken}`;
-
-    const sanitizedName = name.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: newUser.useremail,
-      subject: 'Confirmação de e-mail - Põe na Conta',
-      html: `
-        <h3>Olá, ${sanitizedName}!</h3>
-        <p>Obrigado por se cadastrar na <strong>Põe na Conta</strong>.</p>
-        <p>Para ativar sua conta, por favor confirme seu e-mail clicando no botão abaixo:</p>
-        <p><a href="${verifyUrl}" style="background-color: #163465; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Confirmar e-mail</a></p>
-        <p><em>Este link é válido por 20 minutos.</em></p>
-        <hr>
-        <p style="font-size: 12px; color: gray;">Este é um e-mail automático, por favor não responda.</p>
-      `,
+    
+    await transporter.activateEmail({
+      name: newUser.name,
+      useremail: newUser.useremail,
+      emailToken,
     });
 
-    res.status(201).json({
-      message:
-        'Usuário criado com sucesso. Verifique seu e-mail para ativar a conta.',
+    return res.status(201).json({
+      message: 'Usuário criado com sucesso. Verifique seu email para ativar sua conta.'
     });
+    
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
     res.status(500).json({ error: 'Erro interno ao criar usuário.' });
   }
 };
 
-exports.email = async (req, res) => {
+exports.verifyEmailToken = async (req, res) => {
   const { token } = req.query;
 
   if (!token) {
@@ -122,7 +108,7 @@ exports.email = async (req, res) => {
   }
 };
 
-exports.delete = async (req, res) => {
+exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id);
 
@@ -153,7 +139,6 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: 'Usuário não encontrado' });
     }
 
-    // Verifica se o email foi confirmado
     if (!user.emailverified) {
       return res.status(403).json({
         error: 'E-mail não verificado. Verifique sua caixa de entrada.',
