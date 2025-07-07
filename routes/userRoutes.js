@@ -136,7 +136,7 @@ router.post('/users/forgot-pass', userController.forgotPass);
  *               $ref: '#/components/schemas/Error'
  */
 // GET /verify-email - Valida o email cadastrado
-router.get('/verify-email', userController.email);
+router.get('/verify-email', userController.verifyEmailToken);
 
 /**
  * @swagger
