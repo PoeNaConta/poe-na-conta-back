@@ -37,20 +37,20 @@ exports.createUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(passwordhash, salt);
-      
+
     const newUser = await User.create({
-        name,
-        useremail,
-        passwordhash: hashedPassword,
-        emailverified: false,
-      });
-  
+      name,
+      useremail,
+      passwordhash: hashedPassword,
+      emailverified: false,
+    });
+
     const emailToken = jwt.sign(
       { id: newUser.id },
       process.env.JWT_EMAIL_SECRET,
       { expiresIn: '20m' },
     );
-    
+
     await transporter.activateEmail({
       name: newUser.name,
       useremail: newUser.useremail,
@@ -58,9 +58,9 @@ exports.createUser = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Usuário criado com sucesso. Verifique seu email para ativar sua conta.'
+      message:
+        'Usuário criado com sucesso. Verifique seu email para ativar sua conta.',
     });
-    
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
     res.status(500).json({ error: 'Erro interno ao criar usuário.' });
