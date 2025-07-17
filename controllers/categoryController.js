@@ -80,7 +80,10 @@ exports.delete = async (req, res) => {
   const { id } = req.body;
 
   try {
-    const client_id = req.user.id;
+    const client_id = Number(req.user.id);
+
+    console.log(id);
+    console.log(client_id);
 
     const category = await Category.findOne({
       where: { id, client_id },
