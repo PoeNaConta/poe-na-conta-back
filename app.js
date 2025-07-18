@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 app.set('json spaces', 2);
 
@@ -15,6 +16,7 @@ const viewRoutes = require('./routes/viewRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 // Middlewares
 app.use(express.json());
+app.use(cors);
 
 // Registro das rotas
 app.use('/api', userRoutes);
