@@ -22,7 +22,7 @@ const viewCategories = sequelize.define(
     },
   },
   {
-    tableName: 'viewCategories',
+    tableName: 'viewcategories',
     timestamps: false,
   },
 );
