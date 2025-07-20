@@ -49,6 +49,23 @@ exports.listAll = async (req, res) => {
   }
 };
 
+//Lista os gastos de uma categoria
+exports.listOne = async (req, res) => {
+  try {
+    const {id} = req.body;
+    const client_id = req.user.id;
+
+    const categories = await Category.findAll({
+      where: { id, client_id },
+    });
+
+    res.status(200).json(categories);
+  } catch (error) {
+    console.error('Erro ao listar categorias:', error);
+    res.status(500).json({ error: 'Erro interno ao listar categorias.' });
+  }
+};
+
 //Atualizar
 exports.update = async (req, res) => {
   const { id, name } = req.body;
