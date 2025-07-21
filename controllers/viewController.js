@@ -1,7 +1,8 @@
 const { Op } = require('sequelize');
 const ViewBalance = require('../models/ViewBalance');
 const ViewCategory = require('../models/ViewCategory');
-const viewDebtsNGains = require('../models/ViewDebtsNGains');
+const ViewDebtsNGains = require('../models/ViewDebtsNGains');
+const ViewCategoryDebts = require('../models/ViewCategoryDebts');
 
 exports.getBalanceDebts = async (req, res) => {
   try {
@@ -77,9 +78,26 @@ exports.getBalanceCategories = async (req, res) => {
   }
 };
 
+exports.getCategoryAllDebts = async (req, res) => {
+  try {
+    const categories = await ViewCategoryDebts.findAll({
+      attributes: ['category', 'debts'],
+      where: { client_id: req.user.id },
+    });
+
+    if (!categories) {
+      return res.status(404).json({ message: 'Nenhuma categoria encontrada' });
+    }
+    res.status(200).json(categories);
+  } catch (error) {
+    console.error('Erro ao buscar o resumo de gastos por categoria:', error);
+    return res.status(500).json({ error: 'Erro interno ao buscar os gastos' });
+  }
+};
+
 exports.getBalanceAllDebts = async (req, res) => {
   try {
-    const results = await viewDebtsNGains.findAll({
+    const results = await ViewDebtsNGains.findAll({
       attributes: ['title', 'balance', 'createdat'],
       where: {
         id: req.user.id,
@@ -100,7 +118,7 @@ exports.getBalanceAllDebts = async (req, res) => {
 
 exports.getBalanceAllGains = async (req, res) => {
   try {
-    const results = await viewDebtsNGains.findAll({
+    const results = await ViewDebtsNGains.findAll({
       attributes: ['title', 'balance', 'createdat'],
       where: {
         id: req.user.id,
