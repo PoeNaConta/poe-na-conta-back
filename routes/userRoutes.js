@@ -247,7 +247,7 @@ router.get('/users/me', auth, userController.searchUser);
  *               $ref: '#/components/schemas/Error'
  */
 // DELETE /users/me - Remover o usuário
-router.delete('/users/me', auth, userController.delete);
+router.delete('/users/me', auth, userController.deleteUser);
 
 /**
  * @swagger
