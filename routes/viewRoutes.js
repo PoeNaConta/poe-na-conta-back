@@ -33,6 +33,7 @@ const auth = require('../middleware/auth');
 // Rota para buscar o resumo de saldo dos clientes
 router.get('/balanceTotal', auth, viewController.getBalanceTotal);
 
+router.get('/CategoriesDebts', auth, viewController.getCategoryAllDebts)
 /**
  * @swagger
  * /balanceGains:

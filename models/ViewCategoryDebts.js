@@ -1,9 +1,7 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database');
 
-const viewCategories = sequelize.define(
-  'ViewCategory',
-  {
+const viewCategoryDebts = sequelize.define('viewcategorydebts', {
     category_id: {
       type: DataTypes.INTEGER,
       field: 'category_id',
@@ -16,15 +14,10 @@ const viewCategories = sequelize.define(
       type: DataTypes.INTEGER,
       field: 'client_id',
     },
-    balance: {
+    debts: {
       type: DataTypes.DECIMAL,
-      field: 'balance',
+      field: 'debts',
     },
-  },
-  {
-    tableName: 'viewcategories',
-    timestamps: false,
-  },
-);
+});
 
-module.exports = viewCategories;
+module.exports = viewCategoryDebts;
