@@ -85,8 +85,6 @@ router.post('/create-category', auth, categoryController.create);
 // GET - Listar todas as categorias
 router.get('/list-all-categories', auth, categoryController.listAll);
 
-router.get('/list-category', auth, categoryController.listOne)
-
 /**
  * @swagger
  * /update-category:
