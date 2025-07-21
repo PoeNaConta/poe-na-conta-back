@@ -16,7 +16,7 @@ const viewRoutes = require('./routes/viewRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 // Middlewares
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
 // Registro das rotas
 app.use('/api', userRoutes);
