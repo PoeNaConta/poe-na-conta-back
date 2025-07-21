@@ -1,7 +1,7 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database');
 
-const viewDebtsNGains = sequelize.define('viewDebtsNGains', {
+const viewDebtsNGains = sequelize.define('viewdebtsngains', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
