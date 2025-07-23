@@ -14,7 +14,7 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'Swagger funcionando!' });
 });
 
-const PORT = 3000;
+const PORT = 5000;
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor de teste rodando na porta ${PORT}`);
