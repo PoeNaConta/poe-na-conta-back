@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const transporter = require('../config/transporter');
+const { transporter } = require('../config/transporter');
 require('dotenv').config();
 // const secret = process.env.JWT_SECRET;
 
