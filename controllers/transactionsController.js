@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
 
     await Transaction.create(transactionBody);
 
-    res.status(201).json({
+    return res.status(201).json({
       message: 'Transação criada com sucesso',
     });
   } catch (error) {
