@@ -9,12 +9,10 @@ exports.getBalanceDebts = async (req, res) => {
     const viewbalance = await ViewBalance.findByPk(req.user.id);
 
     if (!viewbalance) {
-      return res
-        .status(404)
-        .json({ message: 'Usuário não possui nenhuma view' });
+      return res.json('0');
     }
 
-    res.status(200).json(viewbalance.debts);
+    return res.status(200).json(viewbalance.debts);
   } catch (error) {
     console.error('Erro ao buscar o resumo de saldo:', error);
     return res
@@ -28,12 +26,10 @@ exports.getBalanceGains = async (req, res) => {
     const viewbalance = await ViewBalance.findByPk(req.user.id);
 
     if (!viewbalance) {
-      return res
-        .status(404)
-        .json({ message: 'Usuário não possui nenhum gasto' });
+      return res.json('0');
     }
 
-    res.status(200).json(viewbalance.gains);
+    return res.status(200).json(viewbalance.gains);
   } catch (error) {
     console.error('Erro ao buscar o resumo de saldo:', error);
     return res
@@ -47,12 +43,10 @@ exports.getBalanceTotal = async (req, res) => {
     const viewbalance = await ViewBalance.findByPk(req.user.id);
 
     if (!viewbalance) {
-      return res
-        .status(404)
-        .json({ message: 'Usuário não possui nenhuma view' });
+      return res.json('0');
     }
 
-    res.status(200).json(viewbalance.total);
+    return res.status(200).json(viewbalance.total);
   } catch (error) {
     console.error('Erro ao buscar o resumo de saldo:', error);
     return res
@@ -69,9 +63,9 @@ exports.getBalanceCategories = async (req, res) => {
     });
 
     if (!categories) {
-      return res.status(404).json({ message: 'Nenhuma categoria encontrada' });
+      return res.json([]);
     }
-    res.status(200).json(categories);
+    return res.status(200).json(categories);
   } catch (error) {
     console.error('Erro ao buscar o resumo de saldo por categoria:', error);
     return res.status(500).json({ error: 'Erro interno ao buscar o saldo' });
@@ -86,9 +80,9 @@ exports.getCategoryAllDebts = async (req, res) => {
     });
 
     if (!categories) {
-      return res.status(404).json({ message: 'Nenhuma categoria encontrada' });
+      return res.json([]);
     }
-    res.status(200).json(categories);
+    return res.status(200).json(categories);
   } catch (error) {
     console.error('Erro ao buscar o resumo de gastos por categoria:', error);
     return res.status(500).json({ error: 'Erro interno ao buscar os gastos' });
@@ -106,10 +100,10 @@ exports.getBalanceAllDebts = async (req, res) => {
     });
 
     if (!results) {
-      return res.status(404).json({ message: 'Nenhum gasto registrado' });
+      return res.json([]);
     }
 
-    res.status(200).json(results);
+    return res.status(200).json(results);
   } catch (error) {
     console.error('Erro ao buscar as transações', error);
     return res.status(500).json({ error: 'Erro interno ao buscar transações' });
@@ -127,10 +121,10 @@ exports.getBalanceAllGains = async (req, res) => {
     });
 
     if (!results) {
-      return res.status(404).json({ message: 'Nenhum ganho registrado' });
+      return res.json([]);
     }
 
-    res.status(200).json(results);
+    return res.status(200).json(results);
   } catch (error) {
     console.error('Erro ao buscar as transações', error);
     return res.status(500).json({ error: 'Erro interno ao buscar transações' });

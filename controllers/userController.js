@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { transporter } = require('../config/transporter');
+const { transporter, activateEmail } = require('../config/transporter');
 require('dotenv').config();
 // const secret = process.env.JWT_SECRET;
 
@@ -51,7 +51,7 @@ exports.createUser = async (req, res) => {
       { expiresIn: '20m' },
     );
 
-    await transporter.activateEmail({
+    await activateEmail({
       name: newUser.name,
       useremail: newUser.useremail,
       emailToken,
