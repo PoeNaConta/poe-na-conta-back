@@ -63,7 +63,7 @@ exports.getBalanceCategories = async (req, res) => {
     });
 
     if (!categories) {
-      return res.json('0');
+      return res.json([]);
     }
     return res.status(200).json(categories);
   } catch (error) {
@@ -80,7 +80,7 @@ exports.getCategoryAllDebts = async (req, res) => {
     });
 
     if (!categories) {
-      return res.json('0');
+      return res.json([]);
     }
     return res.status(200).json(categories);
   } catch (error) {
@@ -100,7 +100,7 @@ exports.getBalanceAllDebts = async (req, res) => {
     });
 
     if (!results) {
-      return res.json('0');
+      return res.json([]);
     }
 
     return res.status(200).json(results);
@@ -121,7 +121,7 @@ exports.getBalanceAllGains = async (req, res) => {
     });
 
     if (!results) {
-      return res.json('0');
+      return res.json([]);
     }
 
     return res.status(200).json(results);
